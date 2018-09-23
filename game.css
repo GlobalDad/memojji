@@ -1,0 +1,174 @@
+h1{
+    line-height: 47px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 42px;
+    text-align: center;
+    color: #434344;
+}
+body{
+    background: #CFD0CF;
+}
+/* игровое поле*/
+#gameField{
+    display: grid;
+    grid-template-columns: auto 130px 130px 130px 130px auto;
+    grid-template-rows: 130px 130px 130px;
+    grid-template-areas: '. a b c d .' '. e f g h .' '. i k l m .';
+    grid-gap: 25px;
+}
+/* все карточки игрового поля*/
+#gameField > div{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    perspective: 600px;
+    z-index: 500;
+}
+/* оболочка для переворота карточки*/
+.card {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    border: solid white 5px;
+    border-radius: 9px; 
+    box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.5);
+  }
+  /* лицевая сторона карточки*/
+  .card__face {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;   
+  }
+  .card__face--front {
+    background: linear-gradient(to top right,#22AB93,#19668D);
+    border-radius: 7px;
+  }
+  /* задняя сторона карточки*/
+  .card__face--back {
+    background: white;
+    transform: rotateY( 180deg );
+    text-align: center;
+  }
+  .card__face--back:before{
+    font-size: 75px;
+    content: attr(data-emoji);
+    line-height: 120px;
+  }
+  /* переворот */
+  .card.is-flipped {
+    transform: rotateY(180deg);
+  }
+
+  .blocked-wrong{
+    background:#f44336;
+  }
+
+  .flipped{
+
+  }
+  .blocked-match{
+    background:#5ad66f;
+  }
+
+  .timer{
+    padding-top: 30px;
+    margin: 0 auto;
+    height: 32px;
+    line-height: 36px;
+    font-family: Arial, Helvetica, sans-serif;
+
+  }
+  .timer__box{
+    height: 32px;
+    width: 100px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 32px;
+
+  }
+  .u-loose,
+  .u-win{
+    position: absolute;
+    display: none;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
+    right: 0px;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    text-align: center;
+  }
+  .pop-up-back{
+    background: white;
+    width: 350px;
+    height: 188px;
+    margin: auto;
+  }
+  .u-loose__text,
+  .u-win__text{
+    cursor: default;
+    font-size: 48px;
+    height: 48px;
+    padding-top: 30px;
+    padding-bottom: 40px;
+    display: block;
+    color: #434344;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .u-loose__button,
+  .u-win__button{
+      height: 40px;
+      width: 153.5px;
+      border-radius: 5px;
+      background: linear-gradient(to right,#22AB93,#19668D);
+      font-size: 20px;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      margin: auto;
+      box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+  }
+.u-loose__button:active,
+.u-win__button:active{
+    box-shadow: inset 2px 1px 8px rgba(0, 0, 0, 0.5);
+
+  }
+.u-loose__button span,
+.u-win__button span{
+  margin: auto 30px;
+  cursor: default;
+}
+.u-loose__text span,
+.u-win__text span{
+  -webkit-animation: bounce 0.5s ease infinite alternate;
+  position: relative;
+  display: inline-block;
+}
+.u-loose__text span:nth-child(2),
+.u-win__text span:nth-child(2){
+  -webkit-animation-delay: .1s;
+  transform: scaleY(0.9);
+  
+}
+.u-loose__text span:nth-child(3),
+.u-win__text span:nth-child(3){
+  -webkit-animation-delay: .2s;
+  transform: scaleY(0.8);
+}
+.u-loose__text span:nth-child(4),
+.u-win__text span:nth-child(4){
+  -webkit-animation-delay: .3s;
+  transform: scaleY(0.7);
+}
+@-webkit-keyframes bounce {
+  100%{
+    transform: scaleY(1.5); 
+  }
+}
